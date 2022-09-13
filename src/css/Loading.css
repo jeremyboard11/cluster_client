@@ -1,0 +1,60 @@
+.loading-outer{
+    display:flex;
+    justify-content: center;
+}
+@keyframes ldio-oqvxar0le5d {
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
+}
+.ldio-oqvxar0le5d div { box-sizing: border-box!important }
+.ldio-oqvxar0le5d > div {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 5px;
+  left: 5px;
+  border-radius: 50%;
+  border: 8px solid #000;
+  border-color: #2da88b transparent #2da88b transparent;
+  animation: ldio-oqvxar0le5d 1s linear infinite;
+}
+.ldio-oqvxar0le5d > div:nth-child(2) { border-color: transparent }
+.ldio-oqvxar0le5d > div:nth-child(2) div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+}
+.ldio-oqvxar0le5d > div:nth-child(2) div:before, .ldio-oqvxar0le5d > div:nth-child(2) div:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: -8px;
+  left: 33px;
+  background: #2da88b;
+  border-radius: 50%;
+  box-shadow: 0 82px 0 0 #2da88b;
+}
+.ldio-oqvxar0le5d > div:nth-child(2) div:after { 
+  left: -8px;
+  top: 33px;
+  box-shadow: 82px 0 0 0 #2da88b;
+}
+.loadingio-spinner-dual-ring-l360nyphzxl {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+.ldio-oqvxar0le5d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(0.48);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-oqvxar0le5d div { box-sizing: content-box; }
