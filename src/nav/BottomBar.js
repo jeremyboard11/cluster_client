@@ -12,7 +12,7 @@ const BottomBar = ({tabClick}) => {
         <div className="btm-bar-outer">
             <div className="btm-bar">
                     <div id="tab-new-entry" className="btm-bar-tab selected" onClick={e => {tabClick('newEntry');handleClick(e)}} >
-                            <i className="fa-solid fa-pencil"></i>
+                            <i className="fa-solid fa-plus-square"></i>
                             <div>New Entry</div>
                     </div>
                     <div id="tab-money" className="btm-bar-tab" onClick={e => {tabClick('money');handleClick(e)}} >

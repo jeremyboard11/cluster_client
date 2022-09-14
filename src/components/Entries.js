@@ -17,7 +17,7 @@ const Entries = (props) => {
 
     return(
         <React.Fragment>
-            <div className='flex-section'>
+            <div className='flex-section log-entries'>
                 <div className='flex-section-header'>
                     {type}
                 </div>

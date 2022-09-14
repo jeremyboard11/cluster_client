@@ -11,10 +11,10 @@ const NewEntry = () => {
             {/* Category */}
             <div className="section">
                 <div className="input-div">
+                    <input onKeyUp={(e) => categoryKeypress(e)} id="input-category" className="input-box" placeholder="Input category" autoComplete='off' />
                     <div className="icon">
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </div>
-                    <input onKeyUp={(e) => categoryKeypress(e)} id="input-category" className="input-box" placeholder="Input category" />
                     <div className="input-clear">Clear</div>
                 </div>
 
@@ -26,10 +26,10 @@ const NewEntry = () => {
             {/* Name */}
             <div className="section">
                 <div className="input-div">
+                    <input id="input-name" className="input-box" placeholder="Name of entry ex. 'headache'" autoComplete="off" />
                     <div className="icon">
                         <i className="fa-solid fa-font"></i>
                     </div>
-                    <input id="input-name" className="input-box" placeholder="Name of entry ex. 'headache'" autoComplete="off" />
                     <div className="input-clear">Clear</div>
                 </div>
 
@@ -41,10 +41,10 @@ const NewEntry = () => {
             {/* Level */}
             <div className="section">
                 <div className="input-div">
+                    <input id="input-amount" className="input-box" placeholder="Amount" autoComplete="off" type="tel" />
                     <div className="icon">
                         <i className="fa-solid fa-layer-group"></i>
                     </div>
-                    <input id="input-amount" className="input-box" placeholder="Amount" autoComplete="off" type="tel" />
                     <div className="input-clear">Clear</div>
                 </div>
             </div>
@@ -52,10 +52,10 @@ const NewEntry = () => {
             {/* Unit of measurement */}
             <div className="section">
                 <div className="input-div">
+                    <input id="input-unit" className="input-box" placeholder="Unit of measurement" autoComplete="off" />
                     <div className="icon">
                         <i className="fa-solid fa-ruler-combined"></i>
                     </div>
-                    <input id="input-unit" className="input-box" placeholder="Unit of measurement" autoComplete="off" />
                     <div className="input-clear">Clear</div>
                 </div>
 
@@ -85,7 +85,7 @@ const NewEntry = () => {
             {/* Action Buttons */}
             <div className="section">
                 <div className="action-buttons">
-                    <button id="save-entry" className="action-button blue">Save</button>
+                    <button id="save-entry" className="action-button black">Save</button>
                     <button id="clear-entry" className="action-button grey">Clear</button>
                 </div>
             </div>
