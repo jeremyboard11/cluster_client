@@ -3,6 +3,8 @@ import TopBar from './nav/TopBar'
 import BottomBar from './nav/BottomBar'
 import ActivityLog from './pages/ActivityLog'
 import NewEntry from './pages/NewEntry'
+import Budget from './pages/Budget'
+import Analysis from './pages/Analysis'
 
 const App = (props) => {
 	// Navigation state
@@ -23,10 +25,16 @@ const App = (props) => {
 				</React.Fragment>
 			)}
 			{navPage === 'analysis' && (
-				<TopBar label="Analysis"/>
+				<React.Fragment>
+					<TopBar label="Analysis"/>
+					<Analysis />
+				</React.Fragment>
 			)}
 			{navPage === 'money' && (
-				<TopBar label="Budget"/>
+				<React.Fragment>
+					<TopBar label="Budget"/>
+					<Budget />
+				</React.Fragment>
 			)}
 			{navPage === 'log' && (
 				<React.Fragment>
