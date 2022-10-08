@@ -31873,11 +31873,8 @@ const Budget = () => {
     const [budData, setBudData] = useState({})
     
     useEffect(() => {
-<<<<<<< Updated upstream
-        lollllllllllllllllllllllllllllll
-=======
-        newwwwwwwwwwww
->>>>>>> Stashed changes
+
+        
         // get list of used categories
         var cats = [];
         dat.map((t,i)=>{
