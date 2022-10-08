@@ -3,6 +3,7 @@ import moment from 'moment'
 import DateFilterDisplay from '../components/DateFilterDisplay'
 import ColorDetails from '../components/ColorDetails'
 import BudgetBar from '../components/BudgetBar'
+import {toIso} from '../js/functions'
 var ss = require("string-similarity");
 
 const dat = [
@@ -31846,8 +31847,8 @@ const categoryInfo = {
 }
 
 const filterDates = {
-    start:"05/01/2022",
-    end:"07/01/2022"
+    start:toIso("01/01/2021"),
+    end:toIso("12/31/2021")
 }
 
 
@@ -31868,6 +31869,7 @@ const filterDates = {
 
 var income = 0
 const Budget = () => {
+
     const [budData, setBudData] = useState({})
     
     useEffect(() => {
@@ -31890,12 +31892,11 @@ const Budget = () => {
             
             // get all transactions with current category
             const tr = dat.filter(x => x.Category == c)
-
+            
             // Process each transaction in the current category
             tr.map(t=>{
-                
                 // filter dates
-                let check = moment(t["Posting Date"]).isBetween(filterDates.start,filterDates.end)
+                let check = moment(toIso(t['Posting Date'])).isBetween(filterDates.start,filterDates.end)
                 if(check){
                     // add to income if positive
                     if(t.Amount > 0){
