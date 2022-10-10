@@ -8,9 +8,13 @@ const BudgetBar = (props) => {
                     {
                         props.budData && (
                             Object.keys(props.budData).map((d,i)=>{
-                                return(
-                                    <div key={i} className={`bud-${props.budData[d].category}`} style={{backgroundColor:"#"+props.categoryInfo[props.budData[d].category].color,flex:props.budData[d].amount/props.income}}></div>
-                                )
+                                // only render bar section for negative amounts
+                                if(props.budData[d].category !== 'ignore' && props.budData[d].amount < 0 || props.budData[d].category == 'ignore' && props.budData[d].amount < 0){
+                                    let percent = props.budData[d].amount/props.income * -1
+                                    return(
+                                        <div key={i} className={`bud-${props.budData[d].category}`} style={{backgroundColor:"#"+props.categoryInfo[props.budData[d].category].color,flex:percent}}></div>
+                                    )
+                                }
                             })
                         )
                     }

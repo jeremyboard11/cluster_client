@@ -1,12 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 
 const ColorDetails = (props) => {
+    // const budData
     return(
         <React.Fragment>
             <div className='section'>
                 <div className='color-details-div'>
                     {
-                        Object.keys(props.categoryInfo).map((cat,i) => {
+                        Object.values(props.categories).map((cat,i) => {
                             let category = cat
                             if(cat == "ignore"){category = "other"}
 
@@ -15,8 +16,7 @@ const ColorDetails = (props) => {
                                     <div className='color-preview' style={{backgroundColor:"#"+props.categoryInfo[cat].color}}></div>
                                     <div className='color-label'>
                                         <div>{category}</div>
-                                        {/* <div>{new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'}).format(Object.values(props.budData).filter(x => x.category == cat)[0].amount)}</div> */}
-                                        <div>amount</div>
+                                        <div>{new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'}).format(Object.values(props.budData).filter(x => x.category == cat)[0].amount)}</div>
                                     </div>
                                 </div>
                             )

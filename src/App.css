@@ -384,4 +384,16 @@ input:focus{
 .color-label>div:nth-child(2){
     font-size:12px;
 }
+
+.money-in-out{
+    display:flex;
+    flex-direction: row;
+    color:#333;
+    font-size:14px;
+    justify-content:center;
+}
+.money-in-out>div{
+    padding:8px;
+    text-align:center;
+}
 /* END Budget */

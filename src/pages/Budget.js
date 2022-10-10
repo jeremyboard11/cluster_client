@@ -3,6 +3,7 @@ import moment from 'moment'
 import DateFilterDisplay from '../components/DateFilterDisplay'
 import ColorDetails from '../components/ColorDetails'
 import BudgetBar from '../components/BudgetBar'
+import MoneyInOut from '../components/MoneyInOut'
 import {toIso} from '../js/functions'
 var ss = require("string-similarity");
 
@@ -31843,87 +31844,86 @@ const categoryInfo = {
     },
     medical:{
         color:"959EEE"
+    },
+    income:{
+        color:"F00"
     }
 }
 
 const filterDates = {
-    start:toIso("01/01/2021"),
-    end:toIso("12/31/2021")
+    start:toIso("03/01/2022"),
+    end:toIso("04/01/2022")
 }
 
 
 
 
+// ----------------------     DateFilterDisplay TODO: add clickable arrows for browsing by month. button to choose how many months it shows       ----------------------------
 
-
-             //           TODO:            fix income state
-
-
-
+// ----------------------     ColorDetails TODO: make sectios clickable, loads transactions for selected category below       ----------------------------
 
 
 
 
 
-
-
-var income = 0
 const Budget = () => {
 
     const [budData, setBudData] = useState({})
+    const [categories, setCategories] = useState({})
+    var [income, setIncome] = useState(0)
+    var [money, setMoney] = useState({in:0,out:0,saved:0})
     
     useEffect(() => {
 
-        
-        // get list of used categories
-        var cats = [];
-        dat.map((t,i)=>{
-            if(!cats.includes(t.Category)){
-                cats.push(t.Category)
-            }
-        })
-        
-        // budget bar formed from bud values
-        const bud = {}
-        // add up amounts for each category
-        cats.map((c,i)=>{
-            
-            // Total amount spent for current category
-            let amount = 0;
-            
-            // get all transactions with current category
-            const tr = dat.filter(x => x.Category == c)
-            
-            // Process each transaction in the current category
-            tr.map(t=>{
-                // filter dates
-                let check = moment(toIso(t['Posting Date'])).isBetween(filterDates.start,filterDates.end)
-                if(check){
-                    // add to income if positive
-                    if(t.Amount > 0){
-                        income += Number(t.Amount)
-                    }
+        var cats = []
+        const bud = []
+        // Map Each transaction (filter dates and add to list of categories)
+        dat.map((transaction,i)=>{
+            let category = transaction.Category
 
-                    // ignore transactions with ignore category and negative amount (so income isn't ignored)
-                    if(c == "ignore" && t.Amount < 0){return}
-                    
-                    // update amount total for category (only if negative - for spending)
-                    if(t.Amount < 0){amount = amount + Number(t.Amount)}
+            // skip transaction if not between dates
+            if(!moment(toIso(transaction['Posting Date'])).isBetween(filterDates.start,filterDates.end)){return}
+
+            // add income if applicable
+            if(category == 'ignore' && transaction.Amount > 0){
+                setIncome(income += Number(transaction.Amount))
+            }
+
+            // add expenses to money.out
+            if(transaction.Amount < 0){
+                setMoney({in:money.in,out:money.out += Number(transaction.Amount),saved:money.saved})
+            }
+
+            // process transaction
+                // skip income
+                if(category == 'ignore' && transaction.Amount > 0){return}
+                let budIndex = bud.findIndex(x => x.category == category)
+                if(budIndex !== -1){
+                    // exists in budget obj
+                    bud[budIndex].amount += Number(transaction.Amount)
+                }else{
+                    // does not exist in budget obj
+                    cats.push(category)
+                    bud.push({category:category,amount:Number(transaction.Amount)})
                 }
-                
-            })
-            if(amount < 0){amount = amount * -1}
-            bud[i] = {category:c,amount:amount}
         })
+
+        // set money in,saved
+        setMoney({in:income,out:money.out,saved:income + money.out})
+
+        // set category list
+        setCategories(cats)
+        
         console.log("Income for dates "+filterDates.start+" to "+filterDates.end+" = $"+Math.round(income));
 
 
         // Sort categories by highest spending
-        let sortedArray = Object.keys(bud).sort((a,b) => {return bud[b].amount - bud[a].amount})
+        let sortedArray = Object.keys(bud).sort((a,b) => {return bud[a].amount - bud[b].amount})
         let sorted = {}
         for(let i = 0;i < sortedArray.length; i++){
             sorted[i] = bud[sortedArray[i]]
         }
+        
         setBudData(sorted)
     },[])
 
@@ -31934,9 +31934,9 @@ const Budget = () => {
             {/* Load budget bar with category data: {category:'housing',amount:5000} */}
             <BudgetBar {...{budData,categoryInfo,income}} />
             
-            <div style={{padding:"4px",fontSize:"24px",textAlign:"center",color:"#319B7F"}}>+{new Intl.NumberFormat(undefined,{style:'currency',currency:'USD'}).format(income)}</div>
+            <MoneyInOut {...{money}}/>
 
-            <ColorDetails {...{categoryInfo,budData}} />
+            <ColorDetails {...{categoryInfo,budData,categories}} />
         </React.Fragment>
     )
 }
