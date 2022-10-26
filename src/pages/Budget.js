@@ -31850,10 +31850,6 @@ const categoryInfo = {
     }
 }
 
-const filterDates = {
-    start:toIso("03/01/2022"),
-    end:toIso("04/01/2022")
-}
 
 
 
@@ -31863,15 +31859,17 @@ const filterDates = {
 // ----------------------     ColorDetails TODO: make sectios clickable, loads transactions for selected category below       ----------------------------
 
 
-
-
-
 const Budget = () => {
-
+    const [test, setTest] = useState("yeah")
+    
     const [budData, setBudData] = useState({})
     const [categories, setCategories] = useState({})
     var [income, setIncome] = useState(0)
     var [money, setMoney] = useState({in:0,out:0,saved:0})
+    var [filterDates, setFilterDates] = useState({start:"2022-01-01",end:"2022-03-01"})
+    var [calendar, setCalendar] = useState({})
+    
+
     
     useEffect(() => {
 
@@ -31925,11 +31923,12 @@ const Budget = () => {
         }
         
         setBudData(sorted)
+
     },[])
 
     return(
         <React.Fragment>
-            <DateFilterDisplay {...{start:filterDates.start,end:filterDates.end}} />
+            <DateFilterDisplay {...{filterDates,filterDates,setFilterDates}} />
 
             {/* Load budget bar with category data: {category:'housing',amount:5000} */}
             <BudgetBar {...{budData,categoryInfo,income}} />

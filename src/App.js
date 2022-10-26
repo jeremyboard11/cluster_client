@@ -12,7 +12,7 @@ const App = (props) => {
 
 	useEffect(() => {
 		// Set default navigation page on load
-		setNavPage('newEntry')
+		setNavPage('money')
 	}, [])
 
 	return (
